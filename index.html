@@ -12,9 +12,10 @@
     <div class="background" id="bg"></div>
 
     <div class="main-wrapper">
+        
         <div class="content-side">
             <div class="profile-container anim-pop-in">
-                <img src="https://media1.tenor.com/m/x3Wn5-xL2BIAAAAC/samurai-jack.gif" alt="Nowace Logo" class="profile-gif">
+                <img src="samuray.gif" alt="Nowace Logo" class="profile-gif">
             </div>
             
             <h1 class="anim-slide-down">NOWACE</h1>
@@ -30,17 +31,20 @@
         </div>
 
         <div class="visual-side anim-fade-up">
-            <div class="animation-window">
-                <div class="ball-container active">
-                    <div class="cyber-ball"></div>
-                    <div class="cyber-ball-glow"></div>
+            <div class="cyber-window">
+                <canvas id="matrix-canvas"></canvas>
+                
+                <div class="ball-wrapper">
+                    <div class="neon-ball"></div>
+                    <div class="neon-ring"></div>
                 </div>
-                <canvas id="matrix-canvas" class="matrix-container"></canvas>
             </div>
         </div>
+
     </div>
 
     <script>
+        // --- Arka Plan Yıldızları ---
         const bg = document.getElementById('bg');
         for (let i = 0; i < 50; i++) {
             let star = document.createElement('div');
@@ -51,12 +55,13 @@
             star.style.width = size + 'px';
             star.style.height = size + 'px';
             star.style.animationDuration = (Math.random() * 5 + 3) + 's';
-            star.style.animationDelay = (Math.random() * 5) + 's';
+            star.style.animationDelay = Math.random() * 5 + 's';
             bg.appendChild(star);
         }
 
+        // --- Yazı Efekti ---
         const textElement = document.getElementById('typing-text');
-        const texts = ["Geliştirici.", "Tasarım Meraklısı.", "Teknoloji Tutkunu.", "nowacee"];
+        const texts = ["Geliştirici.", "Tasarım Meraklısı.", "nowacee"];
         let textIndex = 0, charIndex = 0, isDeleting = false, isWaiting = false;
 
         function type() {
@@ -64,69 +69,46 @@
             if (isWaiting) { setTimeout(() => { isWaiting = false; isDeleting = true; type(); }, 2000); return; }
             if (isDeleting) { textElement.textContent = currentText.substring(0, charIndex - 1); charIndex--; }
             else { textElement.textContent = currentText.substring(0, charIndex + 1); charIndex++; }
+            
             let typeSpeed = isDeleting ? 50 : 100;
             if (!isDeleting && charIndex === currentText.length) isWaiting = true;
             else if (isDeleting && charIndex === 0) { isDeleting = false; textIndex = (textIndex + 1) % texts.length; typeSpeed = 500; }
             setTimeout(type, typeSpeed);
         }
-        setTimeout(type, 1500);
+        setTimeout(type, 1000);
 
-        const ballContainer = document.querySelector('.ball-container');
-        const matrixCanvas = document.getElementById('matrix-canvas');
-        const ctx = matrixCanvas.getContext('2d');
-        let w, h, columns, drops;
-        const matrixChars = "NOWACE01GITHUBPROJECTSDISCORD<>//{}[]";
-        
-        function resizeCanvas() {
-            w = matrixCanvas.width = matrixCanvas.parentElement.offsetWidth;
-            h = matrixCanvas.height = matrixCanvas.parentElement.offsetHeight;
-            columns = Math.floor(w / 20);
-            drops = [];
-            for (let i = 0; i < columns; i++) drops[i] = Math.random() * -h;
+        // --- Matrix Efekti (Sağ Taraf Arka Planı) ---
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        let w, h, drops;
+
+        function initMatrix() {
+            w = canvas.width = canvas.parentElement.offsetWidth;
+            h = canvas.height = canvas.parentElement.offsetHeight;
+            const columns = Math.floor(w / 20);
+            drops = Array(columns).fill(1);
         }
-        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+        
+        window.addEventListener('resize', initMatrix);
+        // Canvas yüklenmesi için küçük bir gecikme
+        setTimeout(initMatrix, 100);
 
         function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            if(!w) return;
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Kod izi
             ctx.fillRect(0, 0, w, h);
-            ctx.fillStyle = '#00ffcc';
+            ctx.fillStyle = '#0f0'; // Yeşil kod rengi
             ctx.font = '15px monospace';
+            
             for (let i = 0; i < drops.length; i++) {
-                const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                const text = String.fromCharCode(0x30A0 + Math.random() * 96);
                 ctx.fillText(text, i * 20, drops[i] * 20);
                 if (drops[i] * 20 > h && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
+        setInterval(drawMatrix, 50);
 
-        let matrixInterval;
-        let animationState = 'ball';
-
-        function loopAnimation() {
-            if (animationState === 'ball') {
-                setTimeout(() => {
-                    ballContainer.classList.remove('active');
-                    setTimeout(() => {
-                        matrixCanvas.classList.add('active');
-                        matrixInterval = setInterval(drawMatrix, 50);
-                        animationState = 'matrix';
-                        loopAnimation();
-                    }, 500);
-                }, 4000);
-            } else if (animationState === 'matrix') {
-                setTimeout(() => {
-                    clearInterval(matrixInterval);
-                    ctx.clearRect(0, 0, w, h);
-                    matrixCanvas.classList.remove('active');
-                    setTimeout(() => {
-                        ballContainer.classList.add('active');
-                        animationState = 'ball';
-                        loopAnimation();
-                    }, 500);
-                }, 5000);
-            }
-        }
-        setTimeout(loopAnimation, 2000);
     </script>
 </body>
 </html>
