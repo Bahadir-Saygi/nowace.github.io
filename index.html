@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nowace | Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <div class="layout">
+        
+        <aside class="sidebar fade-in">
+            <div class="profile-card">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img id="discord-avatar" src="https://media1.tenor.com/m/x3Wn5-xL2BIAAAAC/samurai-jack.gif" alt="Profil">
+                    <div id="status-dot" class="status-dot grey" title="Offline"></div>
+                </div>
+                
+                <h1 class="username">Nowace</h1>
+                <p class="role">Geliştirici & İçerik Üretici</p>
+                
+                <div class="location-pill">
+                    <i class="fa-solid fa-location-dot"></i> Türkiye
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="social-links">
+                    <a href="https://github.com/Bahadir-Saygi" target="_blank" class="link-item">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                    <a href="https://instagram.com/nowace.ww" target="_blank" class="link-item">
+                        <i class="fa-brands fa-instagram"></i> Instagram
+                    </a>
+                    <div class="link-item discord-btn" onclick="window.open('https://discord.com/users/938458334305058836')">
+                        <i class="fa-brands fa-discord"></i> Discord
+                    </div>
+                </div>
+
+                <div class="tech-stack-title">Kullandığım Teknolojiler</div>
+                <div class="tech-stack">
+                    <div class="tech-box html"><i class="fa-brands fa-html5"></i></div>
+                    <div class="tech-box css"><i class="fa-brands fa-css3-alt"></i></div>
+                    <div class="tech-box js"><i class="fa-brands fa-js"></i></div>
+                    <div class="tech-box py"><i class="fa-brands fa-python"></i></div>
+                    <div class="tech-box react"><i class="fa-brands fa-react"></i></div>
+                    <div class="tech-box lua"><i class="fa-solid fa-moon"></i></div> 
+                </div>
+            </div>
+        </aside>
+
+        <main class="content fade-in">
+            
+            <div class="intro-card">
+                <h2>👋 Merhaba, Ben <span class="highlight">Nowace</span></h2>
+                <div class="bio">
+                    <p>Yaklaşık <strong>3 yıldır</strong> yazılım geliştirme alanında kendimi geliştirmekteyim. Özellikle <strong>Discord Botları</strong> ve web teknolojileri üzerine çalışıyorum.</p>
+                    <p>Yenilikçi projeler üretmekten keyif alıyorum.</p>
+                </div>
+                <div class="tags">
+                    <span class="tag">@nowacee</span>
+                    <span class="tag green">Açık Kaynak</span>
+                </div>
+            </div>
+
+            <h3 class="section-header"><i class="fa-solid fa-rocket"></i> Öne Çıkan Projeler</h3>
+
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <div class="card-header">
+                        <div class="icon-box blue"><i class="fa-brands fa-discord"></i></div>
+                        <a href="#" class="arrow-link">↗</a>
+                    </div>
+                    <h4>Discord-Bot-v14</h4>
+                    <p>Modern ve gelişmiş altyapıya sahip Discord bot projesi.</p>
+                    <div class="card-footer">
+                        <div class="lang-tag"><span class="dot js-dot"></span> JavaScript</div>
+                        <span class="star-count"><i class="fa-regular fa-star"></i> 12</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-header">
+                         <div class="icon-box yellow"><i class="fa-brands fa-python"></i></div>
+                        <a href="#" class="arrow-link">↗</a>
+                    </div>
+                    <h4>Image-Logger</h4>
+                    <p>HTTP sunucusu üzerinden çalışan görüntü işleme aracı.</p>
+                    <div class="card-footer">
+                        <div class="lang-tag"><span class="dot py-dot"></span> Python</div>
+                        <span class="star-count"><i class="fa-regular fa-star"></i> 45</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-header">
+                         <div class="icon-box purple"><i class="fa-solid fa-globe"></i></div>
+                        <a href="#" class="arrow-link">↗</a>
+                    </div>
+                    <h4>Web-Portfolio</h4>
+                    <p>Kişisel portfolyo web sitesi tasarımı.</p>
+                    <div class="card-footer">
+                        <div class="lang-tag"><span class="dot html-dot"></span> HTML/CSS</div>
+                        <span class="star-count"><i class="fa-regular fa-star"></i> 8</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const DISCORD_ID = "938458334305058836";
+        
+        async function fetchDiscordData() {
+            try {
+                const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+                
+                // Hata kontrolü: Eğer 404 dönerse (sunucuda yoksan), sessizce çık.
+                if (!response.ok) return;
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    const d = data.data;
+                    
+                    // 1. Profil Resmini Güncelle
+                    if (d.discord_user.avatar) {
+                        document.getElementById('discord-avatar').src = 
+                            `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${d.discord_user.avatar}.png?size=512`;
+                    }
+
+                    // 2. Durum Işığını Güncelle
+                    const statusDot = document.getElementById('status-dot');
+                    statusDot.className = 'status-dot ' + d.discord_status; 
+                }
+            } catch (e) {
+                // Hata olursa varsayılanlar kalır, site bozulmaz.
+                console.log("Lanyard verisi alınamadı.");
+            }
+        }
+        
+        // Sayfa açılınca çalıştır
+        fetchDiscordData();
+        // 60 saniyede bir güncelle
+        setInterval(fetchDiscordData, 60000);
+    </script>
+</body>
+</html>
