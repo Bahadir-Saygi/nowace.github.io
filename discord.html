@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nowace | Discord Profil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background" id="bg"></div>
+
+    <div class="discord-wrapper">
+        <div class="discord-card anim-pop-in">
+            
+            <div class="card-banner"></div>
+
+            <div class="card-header">
+                <div class="pfp-wrapper">
+                    <img src="https://media1.tenor.com/m/x3Wn5-xL2BIAAAAC/samurai-jack.gif" alt="Profil Resmi" class="card-pfp">
+                    <div class="status-indicator"></div> </div>
+                <div class="badges">
+                    <span class="badge" title="HypeSquad">🏠</span>
+                    <span class="badge" title="Developer">👨‍💻</span>
+                    <span class="badge" title="Nitro">🚀</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h2 class="username">nowacee <span class="tag">#0000</span></h2>
+                <p class="custom-status">💻 Coding animated dreams...</p>
+                
+                <div class="divider"></div>
+
+                <div class="about-section">
+                    <h3>HAKKIMDA</h3>
+                    <p>Web Geliştirici, Bot Yapımcısı ve Teknoloji Meraklısı. Yeni projeler peşindeyim.</p>
+                </div>
+
+                <div class="roles-section">
+                    <h3>ROLLER</h3>
+                    <div class="roles-list">
+                        <span class="role-pill red">Owner</span>
+                        <span class="role-pill blue">Developer</span>
+                        <span class="role-pill green">Moderator</span>
+                    </div>
+                </div>
+
+                <a href="https://discord.com/users/SENIN_DISCORD_ID_BURAYA" target="_blank" class="discord-btn">
+                    Profili Görüntüle / Ekle
+                </a>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-btn anim-fade-up">← Ana Sayfaya Dön</a>
+    </div>
+
+    <script>
+        // Yıldız Efekti (Diğer sayfayla aynı)
+        const bg = document.getElementById('bg');
+        for (let i = 0; i < 50; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            let size = Math.random() * 3;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.animationDuration = (Math.random() * 5 + 3) + 's';
+            star.style.animationDelay = (Math.random() * 5) + 's';
+            bg.appendChild(star);
+        }
+    </script>
+</body>
+</html>

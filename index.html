@@ -12,10 +12,9 @@
     <div class="background" id="bg"></div>
 
     <div class="main-wrapper">
-        
         <div class="content-side">
             <div class="profile-container anim-pop-in">
-                <img src="samuray.gif" alt="Nowace Logo" class="profile-gif">
+                <img src="https://media1.tenor.com/m/x3Wn5-xL2BIAAAAC/samurai-jack.gif" alt="Nowace Logo" class="profile-gif">
             </div>
             
             <h1 class="anim-slide-down">NOWACE</h1>
@@ -25,30 +24,25 @@
             </div>
 
             <div class="links-container">
-                <a href="#" class="btn anim-fade-up">Discord: nowacee</a>
+                <a href="discord.html" class="btn anim-fade-up">Discord: nowacee</a>
                 <a href="#" class="btn anim-fade-up">Projelerim</a>
             </div>
         </div>
 
         <div class="visual-side anim-fade-up">
-            <div class="code-window">
-                <div class="window-header">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                    <span class="title">index.js - VS Code</span>
+            <div class="animation-window">
+                <div class="ball-container active">
+                    <div class="cyber-ball"></div>
+                    <div class="cyber-ball-glow"></div>
                 </div>
-                <img src="https://i.pinimg.com/originals/1c/13/f3/1c13f3fe7a6bba370007aea254e195e3.gif" alt="Coding Animation" class="code-gif">
+                <canvas id="matrix-canvas" class="matrix-container"></canvas>
             </div>
         </div>
-
     </div>
 
     <script>
-        // --- Arka plan yıldızlarını oluşturma ---
         const bg = document.getElementById('bg');
-        const starCount = 70;
-        for (let i = 0; i < starCount; i++) {
+        for (let i = 0; i < 50; i++) {
             let star = document.createElement('div');
             star.className = 'star';
             star.style.left = Math.random() * 100 + 'vw';
@@ -61,33 +55,78 @@
             bg.appendChild(star);
         }
 
-        // --- Gelişmiş Yazı Yazma Efekti ---
         const textElement = document.getElementById('typing-text');
         const texts = ["Geliştirici.", "Tasarım Meraklısı.", "Teknoloji Tutkunu.", "nowacee"];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let isWaiting = false;
+        let textIndex = 0, charIndex = 0, isDeleting = false, isWaiting = false;
 
         function type() {
             const currentText = texts[textIndex];
-            if (isWaiting) {
-                setTimeout(() => { isWaiting = false; isDeleting = true; type(); }, 2000); return;
-            }
-            if (isDeleting) {
-                textElement.textContent = currentText.substring(0, charIndex - 1); charIndex--;
-            } else {
-                textElement.textContent = currentText.substring(0, charIndex + 1); charIndex++;
-            }
+            if (isWaiting) { setTimeout(() => { isWaiting = false; isDeleting = true; type(); }, 2000); return; }
+            if (isDeleting) { textElement.textContent = currentText.substring(0, charIndex - 1); charIndex--; }
+            else { textElement.textContent = currentText.substring(0, charIndex + 1); charIndex++; }
             let typeSpeed = isDeleting ? 50 : 100;
-            if (!isDeleting && charIndex === currentText.length) {
-                isWaiting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false; textIndex = (textIndex + 1) % texts.length; typeSpeed = 500;
-            }
+            if (!isDeleting && charIndex === currentText.length) isWaiting = true;
+            else if (isDeleting && charIndex === 0) { isDeleting = false; textIndex = (textIndex + 1) % texts.length; typeSpeed = 500; }
             setTimeout(type, typeSpeed);
         }
         setTimeout(type, 1500);
+
+        const ballContainer = document.querySelector('.ball-container');
+        const matrixCanvas = document.getElementById('matrix-canvas');
+        const ctx = matrixCanvas.getContext('2d');
+        let w, h, columns, drops;
+        const matrixChars = "NOWACE01GITHUBPROJECTSDISCORD<>//{}[]";
+        
+        function resizeCanvas() {
+            w = matrixCanvas.width = matrixCanvas.parentElement.offsetWidth;
+            h = matrixCanvas.height = matrixCanvas.parentElement.offsetHeight;
+            columns = Math.floor(w / 20);
+            drops = [];
+            for (let i = 0; i < columns; i++) drops[i] = Math.random() * -h;
+        }
+        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = '#00ffcc';
+            ctx.font = '15px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                ctx.fillText(text, i * 20, drops[i] * 20);
+                if (drops[i] * 20 > h && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+
+        let matrixInterval;
+        let animationState = 'ball';
+
+        function loopAnimation() {
+            if (animationState === 'ball') {
+                setTimeout(() => {
+                    ballContainer.classList.remove('active');
+                    setTimeout(() => {
+                        matrixCanvas.classList.add('active');
+                        matrixInterval = setInterval(drawMatrix, 50);
+                        animationState = 'matrix';
+                        loopAnimation();
+                    }, 500);
+                }, 4000);
+            } else if (animationState === 'matrix') {
+                setTimeout(() => {
+                    clearInterval(matrixInterval);
+                    ctx.clearRect(0, 0, w, h);
+                    matrixCanvas.classList.remove('active');
+                    setTimeout(() => {
+                        ballContainer.classList.add('active');
+                        animationState = 'ball';
+                        loopAnimation();
+                    }, 500);
+                }, 5000);
+            }
+        }
+        setTimeout(loopAnimation, 2000);
     </script>
 </body>
 </html>

@@ -1,223 +1,178 @@
 /* --- GENEL AYARLAR --- */
 :root {
-    --primary-color: #00ffcc; /* Ana neon rengimiz */
+    --primary-color: #00ffcc;
     --bg-dark: #0a0a0a;
     --text-color: #ffffff;
-    --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.1);
+    --discord-bg: #2f3136;
+    --discord-banner: linear-gradient(90deg, #00c6ff, #0072ff);
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-dark);
-    color: var(--text-color);
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow-x: hidden;
+    margin: 0; padding: 0; background-color: var(--bg-dark); color: var(--text-color);
+    font-family: 'Poppins', sans-serif; display: flex; justify-content: center;
+    align-items: center; min-height: 100vh; overflow-x: hidden;
 }
 
-/* --- ARKA PLAN ANİMASYONU --- */
+/* --- ARKA PLAN --- */
 .background {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-    z-index: -1; overflow: hidden;
+    z-index: -1;
 }
-
 .star {
-    position: absolute; width: 2px; height: 2px;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 50%; box-shadow: 0 0 5px #ffffff;
-    animation: twinkle 5s infinite linear;
+    position: absolute; background: rgba(255, 255, 255, 0.7); border-radius: 50%;
+    box-shadow: 0 0 5px #ffffff; animation: twinkle linear infinite;
 }
-
 @keyframes twinkle {
-    0% { transform: translateY(0) scale(1); opacity: 0.8; }
-    50% { opacity: 0.2; }
-    100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+    0% { opacity: 0.8; } 50% { opacity: 0.2; } 100% { transform: translateY(-100vh); opacity: 0; }
 }
 
-/* --- ANA DÜZEN (Grid/Flex Yapısı) --- */
+/* --- ANA SAYFA DÜZENİ --- */
 .main-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 60px; /* İki taraf arasındaki boşluk */
-    max-width: 1200px;
-    width: 90%;
-    z-index: 1;
-    padding: 20px;
+    display: flex; align-items: center; justify-content: center; gap: 60px;
+    max-width: 1200px; width: 90%; z-index: 1; padding: 20px;
 }
+.content-side { flex: 1; text-align: center; max-width: 500px; }
+.visual-side { flex: 1; display: flex; justify-content: center; max-width: 500px; height: 400px; }
 
-/* --- SOL TARAF (İçerik) --- */
-.content-side {
-    flex: 1;
-    text-align: center; /* Mobilde ortalı, masaüstünde değiştirebiliriz */
-    max-width: 500px;
-}
-
-/* --- SAĞ TARAF (VS Code Animasyonu) --- */
-.visual-side {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    max-width: 600px;
-}
-
-/* --- CODE WINDOW TASARIMI --- */
-.code-window {
-    width: 100%;
-    background: #1e1e1e;
-    border-radius: 10px;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 204, 0.1);
-    overflow: hidden;
-    border: 1px solid var(--glass-border);
-    transition: transform 0.3s ease;
-}
-
-.code-window:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 0 50px rgba(0, 255, 204, 0.2);
-}
-
-.window-header {
-    background: #2d2d2d;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #333;
-}
-
-.dot {
-    width: 12px; height: 12px; border-radius: 50%;
-    margin-right: 8px;
-}
-.red { background: #ff5f56; }
-.yellow { background: #ffbd2e; }
-.green { background: #27c93f; }
-
-.title {
-    margin-left: 15px;
-    font-size: 0.8em;
-    color: #aaa;
-    font-family: monospace;
-}
-
-.code-gif {
-    width: 100%;
-    height: auto;
-    display: block;
-    opacity: 0.9;
-}
-
-/* --- PROFİL GIF --- */
-.profile-container {
-    margin-bottom: 25px;
-}
-
+/* Profil & Yazılar */
+.profile-container { margin-bottom: 25px; }
 .profile-gif {
-    width: 140px; height: 140px;
-    border-radius: 50%; /* Samuray logosunu yuvarlak yaptık */
-    object-fit: cover; /* Resmi kutuya sığdır */
-    border: 3px solid var(--primary-color);
-    box-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
+    width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
+    border: 3px solid var(--primary-color); box-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
     transition: transform 0.5s ease;
 }
+.profile-gif:hover { transform: scale(1.05) rotate(5deg); box-shadow: 0 0 40px rgba(0, 255, 204, 0.8); }
 
-.profile-gif:hover {
-     transform: scale(1.05) rotate(5deg);
-     box-shadow: 0 0 40px rgba(0, 255, 204, 0.8);
-}
-
-/* --- METİNLER --- */
 h1 {
-    font-size: 3.5em;
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-size: 3.5em; margin: 0; font-weight: 700; letter-spacing: 2px;
     background: linear-gradient(to right, #ffffff, var(--primary-color));
+    /* VS CODE UYARISI İÇİN DÜZELTME BURADA YAPILDI: */
     -webkit-background-clip: text;
+    background-clip: text; 
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
 }
-
-.typing-wrapper {
-    font-size: 1.3em;
-    color: #aaaaaa;
-    margin: 10px 0 30px 0;
-    font-weight: 300;
-    height: 30px;
-}
-
+.typing-wrapper { font-size: 1.3em; color: #aaaaaa; margin: 10px 0 30px 0; height: 30px; }
 .cursor { color: var(--primary-color); animation: blink 1s infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* --- BUTONLAR --- */
-.links-container {
-    display: flex; flex-direction: column; gap: 15px;
-    width: 100%; max-width: 300px; margin: 0 auto; /* Butonları ortalar */
+/* Sağ Taraf Animasyon */
+.animation-window {
+    width: 100%; height: 100%; background: #0f0f0f; border-radius: 15px;
+    border: 1px solid var(--glass-border); box-shadow: 0 0 40px rgba(0, 255, 204, 0.1);
+    position: relative; overflow: hidden;
 }
+.ball-container {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; transform: scale(0.5); transition: all 0.5s ease-in-out;
+}
+.ball-container.active { opacity: 1; transform: scale(1); }
+.cyber-ball {
+    width: 100px; height: 100px; border-radius: 50%; background: var(--primary-color);
+    position: relative; animation: spinBall 4s linear infinite;
+}
+.cyber-ball::before {
+    content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; border-radius: 50%;
+    border: 2px dashed var(--primary-color); animation: spinBall 8s linear infinite reverse;
+}
+.cyber-ball-glow {
+    position: absolute; width: 150px; height: 150px; border-radius: 50%;
+    box-shadow: 0 0 60px var(--primary-color), inset 0 0 60px var(--primary-color);
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+}
+.matrix-container {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0; transition: opacity 0.5s ease-in-out; background: #0f0f0f;
+}
+.matrix-container.active { opacity: 1; }
+@keyframes spinBall { 100% { transform: rotate(360deg); } }
+@keyframes pulseGlow { 0% { opacity: 0.5; transform: scale(1); } 100% { opacity: 1; transform: scale(1.1); } }
 
+/* Butonlar */
+.links-container { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 300px; margin: 0 auto; }
 .btn {
-    position: relative;
-    text-decoration: none;
-    color: var(--primary-color);
-    padding: 15px 25px;
-    border: 1px solid rgba(0, 255, 204, 0.3);
-    background: rgba(0, 255, 204, 0.05);
-    border-radius: 8px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    overflow: hidden;
-    transition: all 0.3s;
-    backdrop-filter: blur(5px);
+    position: relative; text-decoration: none; color: var(--primary-color);
+    padding: 15px 25px; border: 1px solid rgba(0, 255, 204, 0.3);
+    background: rgba(0, 255, 204, 0.05); border-radius: 8px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; overflow: hidden; transition: all 0.3s;
 }
-
 .btn::before {
-    content: ''; position: absolute; top: 0; left: -100%;
-    width: 100%; height: 100%; background: var(--primary-color);
-    transition: all 0.4s ease-in-out; z-index: -1;
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: var(--primary-color); transition: all 0.4s ease-in-out; z-index: -1;
 }
-
-.btn:hover {
-    color: #000;
-    box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
-    border-color: var(--primary-color);
-    transform: translateY(-3px);
-}
+.btn:hover { color: #000; box-shadow: 0 0 25px rgba(0, 255, 204, 0.4); transform: translateY(-3px); }
 .btn:hover::before { left: 0; }
 
-/* --- ANİMASYON KEYFRAMES --- */
-.anim-pop-in, .anim-slide-down, .anim-fade-up { opacity: 0; }
-.anim-pop-in { animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; animation-delay: 0.3s; }
-.anim-slide-down { animation: slideDown 0.8s ease-out forwards; animation-delay: 0.6s; }
-.anim-fade-up { animation: fadeUp 0.8s ease-out forwards; animation-delay: 0.9s; }
-
+/* Animasyonlar */
+.anim-pop-in { animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; animation-delay: 0.3s; opacity: 0; }
+.anim-slide-down { animation: slideDown 0.8s ease-out forwards; animation-delay: 0.6s; opacity: 0; }
+.anim-fade-up { animation: fadeUp 0.8s ease-out forwards; animation-delay: 0.9s; opacity: 0; }
 @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 @keyframes slideDown { 0% { transform: translateY(-30px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
 @keyframes fadeUp { 0% { transform: translateY(30px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
 
-/* --- MOBİL UYUM (RESPONSIVE) --- */
+/* DISCORD SAYFASI */
+.discord-wrapper {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 100vh; width: 100%;
+}
+.discord-card {
+    background: #202225; width: 340px; border-radius: 15px; overflow: hidden;
+    position: relative; box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.discord-card:hover { transform: translateY(-10px) rotateX(5deg); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7); }
+.card-banner {
+    height: 100px; background: var(--discord-banner);
+    animation: gradientShift 5s ease infinite; background-size: 200% 200%;
+}
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.card-header { padding: 0 20px; position: relative; top: -40px; display: flex; justify-content: space-between; align-items: flex-end; }
+.pfp-wrapper { position: relative; }
+.card-pfp {
+    width: 80px; height: 80px; border-radius: 50%; border: 6px solid #202225;
+    background: #202225; transition: transform 0.3s;
+}
+.card-pfp:hover { transform: rotate(10deg) scale(1.1); }
+.status-indicator {
+    position: absolute; bottom: 5px; right: 5px; width: 18px; height: 18px;
+    background: #3ba55c; border-radius: 50%; border: 4px solid #202225;
+}
+.badges { display: flex; gap: 5px; background: #18191c; padding: 5px; border-radius: 8px; margin-bottom: 5px; }
+.badge { font-size: 1.2em; cursor: help; }
+.card-body { padding: 0 20px 20px 20px; margin-top: -30px; }
+.username { font-size: 1.4em; color: #fff; margin: 0; }
+.tag { font-size: 0.7em; color: #b9bbbe; font-weight: 400; }
+.custom-status { font-size: 0.9em; color: #b9bbbe; margin-top: 5px; }
+.divider { height: 1px; background: #2f3136; margin: 15px 0; }
+h3 { font-size: 0.8em; color: #b9bbbe; margin-bottom: 10px; text-transform: uppercase; font-weight: 700; }
+.about-section p { font-size: 0.9em; color: #dcddde; line-height: 1.4; }
+.roles-list { display: flex; flex-wrap: wrap; gap: 5px; }
+.role-pill {
+    font-size: 0.75em; padding: 4px 8px; border-radius: 4px;
+    background: #2f3136; color: #fff; display: flex; align-items: center;
+}
+.role-pill::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
+.role-pill.red::before { background: #ff4d4d; }
+.role-pill.blue::before { background: #4da6ff; }
+.role-pill.green::before { background: #4dff88; }
+.discord-btn {
+    display: block; width: 100%; text-align: center; background: #5865F2; color: white;
+    padding: 10px 0; margin-top: 20px; border-radius: 5px; text-decoration: none;
+    font-weight: 600; transition: background 0.3s; box-sizing: border-box;
+}
+.discord-btn:hover { background: #4752c4; }
+.back-btn { margin-top: 20px; color: #aaaaaa; text-decoration: none; font-size: 0.9em; transition: color 0.3s; }
+.back-btn:hover { color: #fff; }
+
+/* Mobil Uyum */
 @media (max-width: 900px) {
-    .main-wrapper {
-        flex-direction: column; /* Alt alta diz */
-        gap: 40px;
-    }
-    
-    .content-side {
-        order: 1; /* Önce içerik gelsin */
-        width: 100%;
-    }
-
-    .visual-side {
-        order: 2; /* Sonra kod ekranı */
-        width: 100%;
-    }
-
+    .main-wrapper { flex-direction: column; gap: 40px; }
+    .content-side, .visual-side { width: 100%; max-width: 100%; }
+    .visual-side { height: 300px; order: 2; }
+    .content-side { order: 1; }
     h1 { font-size: 2.5em; }
-    .profile-gif { width: 120px; height: 120px; }
 }
