@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoş Geldiniz | Kişisel Portfolyo</title>
+    <style>
+        /* Genel Ayarlar */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Arka Plan Animasyonu (Kayan Yıldızlar/Parçacıklar) */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #1a1a1a 10%, #000000 90%);
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
+        }
+
+        /* Kart Tasarımı (Glassmorphism) */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 200, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Profil Resmi */
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #00ffcc;
+            margin-bottom: 20px;
+            object-fit: cover;
+            box-shadow: 0 0 15px #00ffcc;
+            transition: transform 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Yazı Efektleri */
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #00ffcc;
+        }
+
+        .typing-text {
+            font-size: 16px;
+            color: #cccccc;
+            margin-bottom: 30px;
+            height: 20px; /* Titreme olmaması için sabit yükseklik */
+        }
+
+        /* Butonlar */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid #00ffcc;
+            border-radius: 5px;
+            transition: all 0.3s;
+            background: transparent;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background: #00ffcc;
+            color: #000;
+            box-shadow: 0 0 15px #00ffcc;
+        }
+
+        /* Mobil Uyum */
+        @media (max-width: 600px) {
+            .card { padding: 20px; }
+            h1 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background" id="bg"></div>
+
+    <div class="card">
+        <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Profil" class="profile-img">
+        
+        <h1>Kullanıcı Adın</h1>
+        
+        <div class="typing-text" id="typing"></div>
+
+        <div class="links">
+            <a href="#" class="btn">Instagram</a>
+            <a href="#" class="btn">Discord</a>
+            <a href="#" class="btn">YouTube</a>
+        </div>
+    </div>
+
+    <script>
+        // Arka plan parçacıklarını oluşturma
+        const bg = document.getElementById('bg');
+        for (let i = 0; i < 50; i++) {
+            let p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            bg.appendChild(p);
+        }
+
+        // Yazı Yazma Efekti (Typewriter)
+        const textElement = document.getElementById('typing');
+        const texts = ["Yazılım Geliştirici", "Oyun Tutkunu", "Discord Bot Yapımcısı", "Teknoloji Meraklısı"];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = 100;
+
+            if (isDeleting) {
+                typeSpeed /= 2;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                typeSpeed = 2000; // Yazı bitince bekleme süresi
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', type);
+    </script>
+</body>
+</html>
