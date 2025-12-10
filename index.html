@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nowace | Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <div class="layout">
+        
+        <aside class="sidebar fade-in">
+            <div class="profile-card">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img id="discord-avatar" src="samuray.gif" alt="Profil">
+                    <div id="status-dot" class="status-dot grey"></div>
+                </div>
+                
+                <h1 class="username">Nowace</h1>
+                <p class="role">Discord & FiveM Developer</p>
+                
+                <div class="location-pill"><i class="fa-solid fa-location-dot"></i> Türkiye</div>
+
+                <div class="divider"></div>
+
+                <div class="social-links">
+                    <a href="https://github.com/Bahadir-Saygi" target="_blank" class="link-item">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                    <a href="https://instagram.com/nowace.ww" target="_blank" class="link-item">
+                        <i class="fa-brands fa-instagram"></i> Instagram
+                    </a>
+                    <div class="link-item discord-btn" onclick="window.open('https://discord.com/users/938458334305058836')">
+                        <i class="fa-brands fa-discord"></i> Discord
+                    </div>
+                </div>
+
+                <div id="discord-activity" class="activity-box hidden">
+                    <div class="act-icon-wrapper">
+                        <img id="activity-image" src="" alt="Activity" class="hidden">
+                        <i id="activity-default-icon" class="fa-brands fa-spotify hidden"></i>
+                    </div>
+                    <div class="act-info">
+                        <span id="act-header">Listening to Spotify</span>
+                        <strong id="act-name">Song Name</strong>
+                        <span id="act-details">Artist</span>
+                    </div>
+                </div>
+
+                <div class="tech-stack-title">Uzmanlık Alanlarım</div>
+                <div class="tech-stack">
+                    <div class="tech-box lua" title="Lua"><i class="fa-solid fa-moon"></i></div>
+                    <div class="tech-box js" title="JS"><i class="fa-brands fa-js"></i></div>
+                    <div class="tech-box py" title="Python"><i class="fa-brands fa-python"></i></div>
+                    <div class="tech-box html" title="HTML"><i class="fa-brands fa-html5"></i></div>
+                    <div class="tech-box css" title="CSS"><i class="fa-brands fa-css3-alt"></i></div>
+                    <div class="tech-box db" title="SQL"><i class="fa-solid fa-database"></i></div> 
+                </div>
+            </div>
+        </aside>
+
+        <main class="content fade-in">
+            
+            <div class="intro-card">
+                <h2>👋 Merhaba, Ben <span class="highlight">Nowace</span></h2>
+                <div class="bio">
+                    <p>Yaklaşık <strong>3 yıldır</strong> yazılım geliştirme alanında kendimi geliştirmekteyim. Özellikle <strong>Discord Botları</strong> ve <strong>FiveM (Lua)</strong> üzerine profesyonel çözümler üretiyorum.</p>
+                </div>
+            </div>
+
+            <div class="section-wrapper">
+                <div class="section-head">
+                    <div class="icon-circle red"><i class="fa-solid fa-briefcase"></i></div>
+                    <div>
+                        <h3>Çalıştığım Projeler</h3>
+                        <p class="subtext">Profesyonel deneyimlerim ve sunucu yönetimleri</p>
+                    </div>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="card-header">
+                            <div class="repo-icon"><i class="fa-solid fa-gamepad"></i></div>
+                            <span class="year-badge">2025 - Halen</span>
+                        </div>
+                        <h4>Bronx RPG</h4>
+                        <p>FiveM sunucusu için özel script geliştirme, optimizasyon ve oyun içi sistemler.</p>
+                        <div class="card-footer">
+                            <div class="lang-tag"><span class="dot lua-dot"></span> Lua</div>
+                            <span class="stats">Developer</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="card-header">
+                            <div class="repo-icon"><i class="fa-solid fa-robot"></i></div>
+                            <span class="year-badge">2025 - Halen</span>
+                        </div>
+                        <h4>Bronx RPG Bot</h4>
+                        <p>Sunucu ile entegre çalışan moderasyon ve kayıt botu.</p>
+                        <div class="card-footer">
+                            <div class="lang-tag"><span class="dot js-dot"></span> Node.js</div>
+                            <span class="stats">Developer</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="card-header">
+                            <div class="repo-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                            <span class="year-badge">2025 - Devam Ediyor</span>
+                        </div>
+                        <h4>Deprem Uygulaması</h4>
+                        <p>Şu an test aşamasında olan, henüz duyurulmamış mobil tabanlı deprem bilgilendirme sistemi.</p>
+                        <div class="card-footer">
+                            <div class="lang-tag"><span class="dot" style="background: #e0e0e0;"></span> Mobile</div>
+                            <span class="stats" style="color: #FFC83D;">Test Ediliyor</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="section-wrapper">
+                <div class="section-head">
+                    <div class="icon-circle purple"><i class="fa-brands fa-discord"></i></div>
+                    <div>
+                        <h3>Topluluklar</h3>
+                        <p class="subtext">Yöneticisi olduğum veya geliştirdiğim sunucular</p>
+                    </div>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card server-card">
+                        <div class="card-header">
+                            <div class="repo-icon"><i class="fa-solid fa-users"></i></div>
+                            <span class="year-badge status-online">Aktif</span>
+                        </div>
+                        <h4>Bronx RPG</h4>
+                        <p>Resmi Discord sunucusu. Topluluğa katılmak ve güncellemelerden haberdar olmak için tıkla.</p>
+                        
+                        <a href="https://discord.gg/bncHq9cvPX" target="_blank" class="server-btn">
+                            Sunucuya Katıl
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-wrapper">
+                <div class="section-head">
+                    <div class="icon-circle yellow"><i class="fa-solid fa-heart"></i></div>
+                    <div>
+                        <h3>Destekçiler</h3>
+                        <p class="subtext">Projelerimde emeği geçen değerli insanlar</p>
+                    </div>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="card-header">
+                            <div class="repo-icon"><i class="fa-solid fa-crown" style="color: #FFC83D;"></i></div>
+                            <span class="year-badge" style="color: #FFC83D; background: rgba(255, 200, 61, 0.1);">Sponsor</span>
+                        </div>
+                        <h4>Synioxs</h4>
+                        <p>Projelerime sağladığı katkı ve desteklerden dolayı özel teşekkürler.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const DISCORD_ID = "938458334305058836";
+        
+        async function fetchDiscordData() {
+            try {
+                const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+                if (!response.ok) return; 
+                const data = await response.json();
+                
+                if (data.success) {
+                    const d = data.data;
+
+                    if (d.discord_user.avatar) {
+                        document.getElementById('discord-avatar').src = 
+                            `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${d.discord_user.avatar}.png?size=512`;
+                    }
+                    document.getElementById('status-dot').className = 'status-dot ' + d.discord_status;
+
+                    const actBox = document.getElementById('discord-activity');
+                    const actImg = document.getElementById('activity-image');
+                    const actIcon = document.getElementById('activity-default-icon');
+                    const actHeader = document.getElementById('act-header');
+                    const actName = document.getElementById('act-name');
+                    const actDetails = document.getElementById('act-details');
+
+                    if (d.listening_to_spotify && d.spotify) {
+                        actBox.classList.remove('hidden');
+                        actBox.classList.add('spotify-active');
+                        actImg.src = d.spotify.album_art_url;
+                        actImg.classList.remove('hidden');
+                        actIcon.classList.add('hidden');
+                        actHeader.innerText = "Spotify Dinliyor";
+                        actName.innerText = d.spotify.song;
+                        actDetails.innerText = d.spotify.artist;
+                    } 
+                    else if (d.activities && d.activities.length > 0) {
+                        const game = d.activities.find(a => a.type !== 4);
+                        
+                        if (game) {
+                            actBox.classList.remove('hidden');
+                            actBox.classList.remove('spotify-active');
+                            
+                            if (game.assets && game.assets.large_image) {
+                                let imgId = game.assets.large_image;
+                                if(imgId.startsWith("spotify:")) imgId = imgId.replace("spotify:", "");
+                                actImg.src = `https://cdn.discordapp.com/app-assets/${game.application_id}/${imgId}.png`;
+                                actImg.classList.remove('hidden');
+                                actIcon.classList.add('hidden');
+                            } else {
+                                actImg.classList.add('hidden');
+                                actIcon.className = "fa-solid fa-gamepad";
+                                actIcon.classList.remove('hidden');
+                            }
+
+                            actHeader.innerText = "Oyun Oynuyor";
+                            actName.innerText = game.name;
+                            actDetails.innerText = game.details || game.state || "Oynuyor...";
+                        } else {
+                            actBox.classList.add('hidden');
+                        }
+                    } else {
+                        actBox.classList.add('hidden');
+                    }
+                }
+            } catch (e) { 
+                console.log(e); 
+                document.getElementById('discord-activity').classList.add('hidden');
+            }
+        }
+        fetchDiscordData();
+        setInterval(fetchDiscordData, 5000);
+    </script>
+</body>
+</html>
